@@ -1,11 +1,13 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {borrarCitaAction} from '../actions/citasActions';
 
 const ListadoCitas = () => {
 
     //obtener las citas del state
 const citas = useSelector((state)=>state.citas);
+
+const dispatch = useDispatch();
 
 const mensaje = Object.keys(citas.citas).length === 0 ? 'No hay citas aqui':'Administrador de Pacientes';
 
@@ -28,7 +30,9 @@ const mensaje = Object.keys(citas.citas).length === 0 ? 'No hay citas aqui':'Adm
                             <p className="card-text"><span>Sintomas:</span> <br />
                             {cita.sintomas} </p>
                             <button 
-                                className="btn btn-danger">Borrar &times;
+                                className="btn btn-danger"
+                                onClick={()=> dispatch(borrarCitaAction(cita.id))}
+                                >Borrar &times;
                             </button>
                         </div>
                     </div>
